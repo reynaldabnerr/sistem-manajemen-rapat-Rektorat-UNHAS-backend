@@ -41,4 +41,22 @@ class AdminController extends Controller
         $admin->delete();
         return response()->json(['message' => 'Admin deleted']);
     }
+    public function update(Request $request, $id)
+    {
+        $admin = User::findOrFail($id);
+
+        // Pastikan hanya admin yang bisa diubah
+        if ($admin->role !== 'admin') {
+            return response()->json(['message' => 'Only admins can be updated'], 403);
+        }
+
+        $data = $request->validate([
+            'name'  => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $admin->id,
+        ]);
+
+        $admin->update($data);
+
+        return response()->json($admin);
+    }
 }
