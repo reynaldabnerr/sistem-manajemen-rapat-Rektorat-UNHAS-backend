@@ -17,7 +17,7 @@
         <thead>
             <tr>
                 <th>Nama</th>
-                <th>NIP</th>
+                <th>NIP/NIK</th>
                 <th>Status Kehadiran</th>
             </tr>
         </thead>
